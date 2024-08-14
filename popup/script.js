@@ -1,4 +1,4 @@
-import { setToLocalStorage, getFromLocalStorage } from "./utils.js";
+import { setToLocalStorage, getFromLocalStorage, getSvg } from "./utils.js";
 
 const renderBlockedSites = () => {
   const listOfBlockedSites = getFromLocalStorage("urls");
@@ -8,9 +8,19 @@ const renderBlockedSites = () => {
   if (listOfBlockedSites && listOfBlockedSites.length > 0) {
     // render the list of blocked sites from the localStorage
     listOfBlockedSites.forEach((ele) => {
+      // handling li
       const li = document.createElement("li");
       li.innerText = ele.url;
       li.classList.add("blocked-sites-list-item");
+
+      // delete btn
+      const btn = document.createElement("button");
+      btn.innerHTML = getSvg();
+      btn.classList.add("rm-btn");
+      btn.addEventListener("click", () => removeBlockedSite(ele.url));
+
+      // appending content
+      li.appendChild(btn);
       ul.appendChild(li);
     });
   } else {
@@ -36,6 +46,19 @@ const addBlockedSite = (e) => {
   } else {
     alert("field shouldn't be empty");
   }
+};
+
+const removeBlockedSite = (url) => {
+  const dataFromLocalStorage = getFromLocalStorage("urls");
+
+  // removing the item
+  const filteredData = dataFromLocalStorage.filter((ele) => {
+    return ele.url !== url;
+  });
+
+  localStorage.setItem("urls", JSON.stringify(filteredData));
+
+  renderBlockedSites();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
