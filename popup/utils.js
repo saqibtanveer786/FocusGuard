@@ -1,17 +1,24 @@
-export const setToLocalStorage = (key, content) => {
+export const setToStorage = async (key, content) => {
   try {
-    let dataFromLocalStorage = getFromLocalStorage(key);
-    dataFromLocalStorage.push(content);
-    localStorage.setItem(key, JSON.stringify(dataFromLocalStorage));
+    let dataFromStorage = await getFromStorage("urls");
+    dataFromStorage.push(content);
+    await chrome.storage.local.set({ [key]: dataFromStorage });
   } catch (err) {
-    alert("error occured while setting the item", err);
+    console.log(err);
+    alert("error occured while setting the item");
   }
 };
 
-export const getFromLocalStorage = (key) => {
+export const getFromStorage = (key) => {
   try {
-    const dataFromLocalStorage = localStorage.getItem(key);
-    return dataFromLocalStorage ? JSON.parse(dataFromLocalStorage) : [];
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get([key], (result) => {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        }
+        resolve(result[key] || []);
+      });
+    });
   } catch (err) {
     alert("error occured while getting the items");
     return [];

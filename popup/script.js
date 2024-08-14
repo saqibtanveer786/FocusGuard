@@ -1,7 +1,7 @@
-import { setToLocalStorage, getFromLocalStorage, getSvg } from "./utils.js";
+import { setToStorage, getFromStorage, getSvg } from "./utils.js";
 
-const renderBlockedSites = () => {
-  const listOfBlockedSites = getFromLocalStorage("urls");
+const renderBlockedSites = async () => {
+  const listOfBlockedSites = await getFromStorage("urls");
   const ul = document.querySelector(".blocked-sites-list");
   ul.innerHTML = "";
 
@@ -32,14 +32,14 @@ const renderBlockedSites = () => {
   }
 };
 
-const addBlockedSite = (e) => {
+const addBlockedSite = async (e) => {
   e.preventDefault();
 
   const siteUrl = document.getElementById("url").value;
 
   if (siteUrl) {
-    setToLocalStorage("urls", { url: siteUrl });
-    renderBlockedSites();
+    await setToStorage("urls", { url: siteUrl });
+    await renderBlockedSites();
 
     // clear the field
     document.getElementById("url").value = "";
@@ -48,15 +48,15 @@ const addBlockedSite = (e) => {
   }
 };
 
-const removeBlockedSite = (url) => {
-  const dataFromLocalStorage = getFromLocalStorage("urls");
+const removeBlockedSite = async (url) => {
+  const dataFromLocalStorage = await getFromStorage("urls");
 
   // removing the item
   const filteredData = dataFromLocalStorage.filter((ele) => {
     return ele.url !== url;
   });
 
-  localStorage.setItem("urls", JSON.stringify(filteredData));
+  await chrome.storage.local.set({ ["urls"]: filteredData });
 
   renderBlockedSites();
 };
