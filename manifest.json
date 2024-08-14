@@ -3,8 +3,22 @@
   "description": "A productivity-boosting extension that helps you stay focused during work hours by blocking access to distracting websites. Customize your block list and set your work hours to keep your browsing productive and free from distractions.",
   "version": "0.0.1",
   "manifest_version": 3,
+  "minimum_chrome_version": "93",
 
-  "permissions": ["activeTab", "storage", "webRequest"],
+  "background": {
+    "service_worker": "scripts/background.js",
+    "type": "module"
+  },
+
+  "host_permissions": ["*://*/*"],
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess"
+  ],
 
   "icons": {
     "16": "icons/icon16.png",
