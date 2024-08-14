@@ -25,18 +25,16 @@ const renderBlockedSites = () => {
 const addBlockedSite = (e) => {
   e.preventDefault();
 
-  const siteName = document.getElementById("name").value;
   const siteUrl = document.getElementById("url").value;
 
-  if (siteName && siteUrl) {
-    setToLocalStorage("urls", { name: siteName, url: siteUrl });
+  if (siteUrl) {
+    setToLocalStorage("urls", { url: siteUrl });
     renderBlockedSites();
 
-    // clear the fiels
-    document.getElementById("name").value = "";
+    // clear the field
     document.getElementById("url").value = "";
   } else {
-    alert("fields shouldn't be empty");
+    alert("field shouldn't be empty");
   }
 };
 
