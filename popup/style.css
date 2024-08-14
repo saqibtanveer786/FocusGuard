@@ -1,0 +1,101 @@
+/* From Uiverse.io by gharsh11032000 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  width: 400px;
+  padding-inline: 20px;
+  padding-block: 30px;
+  background: linear-gradient(#212121, #212121) padding-box,
+    linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box;
+  font-size: 16px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 16px;
+}
+
+.blocked-sites-list {
+  list-style-type: none;
+  gap: 20px;
+}
+
+.blocked-sites-list-item {
+  margin-block: 5px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  background-color: transparent;
+  border: 1px solid #414141;
+}
+
+.container button:active {
+  scale: 0.95;
+}
+
+.container .form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.container .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #717171;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.container .form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  background-color: transparent;
+  border: 1px solid #414141;
+}
+
+input::placeholder {
+  opacity: 0.5;
+}
+
+input:focus {
+  outline: none;
+  border-color: #e81cff;
+}
+
+.form-submit-btn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: flex-start;
+  color: #717171;
+  font-weight: 600;
+  width: 40%;
+  background: #313131;
+  border: 1px solid #414141;
+  padding: 6px 8px;
+  font-size: inherit;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.form-submit-btn:hover {
+  background-color: #fff;
+  border-color: #fff;
+}
