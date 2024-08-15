@@ -1,14 +1,19 @@
+const haveToBlockSite = (urls, userRequestedUrl) => {
+  return urls.some((ele) => {
+    return userRequestedUrl.includes(ele.url);
+  });
+};
+
 chrome.webRequest.onBeforeRequest.addListener(
-  (details) => {
-    // console.log(details);
-    chrome.storage.local.get(["urls"], (result) => {
-      // console.log(result["urls"]);
-      result["urls"].forEach((url) => {
-        if (details.url.includes(url.url)) console.log("working");
-        console.log(url.url);
-        console.log(details.url);
-      });
-    });
+  async (details) => {
+    const result = await chrome.storage.local.get(["urls"]);
+    if (result["urls"]) {
+      if (haveToBlockSite(result["urls"], details.url)) {
+        chrome.tabs.update(details.tabId, {
+          url: "https://saqibtanveer786.github.io/Todo-List-App/",
+        });
+      }
+    }
   },
   { urls: ["<all_urls>"] }
 );
