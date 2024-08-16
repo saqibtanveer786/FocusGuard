@@ -8,7 +8,10 @@
   </head>
   <body>
     <div class="container">
+      <!-- list of blocked urls -->
       <ul class="blocked-sites-list"></ul>
+
+      <!-- form to add urls -->
       <form>
         <div class="form-group">
           <label for="url">Site to block url</label>
@@ -16,6 +19,28 @@
         </div>
         <button id="addBtn" class="form-submit-btn">Add</button>
       </form>
+
+      <!-- works hours showcase -->
+      <div id="work-hours">
+        From `10am` to `6pm` <span id="setTimeBtn">Set</span>
+      </div>
+
+      <!-- dialop to set work hours -->
+      <dialog open id="setTime">
+        <div class="dialog-header">Enter Your Work Hours</div>
+        <div class="form-group">
+          <label for="startHour">Start Time:</label>
+          <input type="time" id="startHour" name="startHour" required />
+        </div>
+        <div class="form-group">
+          <label for="endHour">End Time:</label>
+          <input type="time" id="endHour" name="endHour" required />
+        </div>
+        <div class="form-actions">
+          <button id="cancelButton">Cancel</button>
+          <button id="saveButton">Save</button>
+        </div>
+      </dialog>
     </div>
     <script type="module" src="./script.js"></script>
   </body>

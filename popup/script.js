@@ -66,4 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btn = document.getElementById("addBtn");
   btn.addEventListener("click", addBlockedSite);
+
+  // handling dialog
+  const dialog = document.getElementById("setTime");
+  const setTimeBtn = document.getElementById("setTimeBtn");
+  const cancelBtn = document.getElementById("cancelButton");
+  const saveBtn = document.getElementById("saveButton");
+
+  setTimeBtn.addEventListener("click", (e) => {
+    dialog.style.display = "flex";
+  });
+
+  cancelBtn.addEventListener("click", (e) => {
+    dialog.style.display = "none";
+  });
 });
