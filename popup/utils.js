@@ -1,6 +1,6 @@
 export const setToStorage = async (key, content) => {
   try {
-    let dataFromStorage = await getFromStorage("urls");
+    let dataFromStorage = await getFromStorage(key);
     dataFromStorage.push(content);
     await chrome.storage.local.set({ [key]: dataFromStorage });
   } catch (err) {
@@ -9,10 +9,10 @@ export const setToStorage = async (key, content) => {
   }
 };
 
-export const getFromStorage = (key) => {
+export const getFromStorage = key => {
   try {
     return new Promise((resolve, reject) => {
-      chrome.storage.local.get([key], (result) => {
+      chrome.storage.local.get([key], result => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
         }
